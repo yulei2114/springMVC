@@ -37,7 +37,7 @@ package com.springbasedxml;
     又或者url：http://localhost:8080/mySpringMVC/users/user
     控制台测试正常打印
     example：<url-pattern>/*</url-pattern>,该url为路径匹配中优先级最低的匹配路径，即所有url都可以匹配
-
+    那么url：http://localhost:8080/myspringMVC/index.jsp
  */
 
 

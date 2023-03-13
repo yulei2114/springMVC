@@ -11,6 +11,10 @@
             <servlet-name>Servlet2</servlet-name>
             <servlet-class>com.springbasedxml.servlettest.Servlet2</servlet-class>
         </servlet>
+        <servlet>
+            <servlet-name>ServletAll</servlet-name>
+            <servlet-class>com.springbasedxml.servlettest.ServletAll</servlet-class>
+        </servlet>
         <servlet-mapping>
             <servlet-name>Servlet1</servlet-name>
             <url-pattern>/user/myServlet1</url-pattern>
@@ -18,5 +22,9 @@
         <servlet-mapping>
             <servlet-name>Servlet2</servlet-name>
             <url-pattern>/users/*</url-pattern>
+        </servlet-mapping>
+        <servlet-mapping>
+            <servlet-name>ServletAll</servlet-name>
+            <url-pattern>/*</url-pattern>
         </servlet-mapping>
 </web-app>
