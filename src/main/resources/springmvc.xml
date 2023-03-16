@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+    <!--    配置处理器映射器-->
+    <!--处理器映射器1：SimpleUrlHandlerMapping，映射器可以映射实现了Controller接口的类,该映射器在bean中直接配置mapping属性
+        可以将注册的Controller以引用id的方式进行映射管理，key值表示匹配URL时对应的路径
+        -->
+<!--    <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">-->
+<!--        <property name="mappings">-->
+<!--            <props>-->
+<!--                这两个Controller直接注册的-->
+<!--                <prop key="/ControllerBase1">controllerBase1</prop>-->
+<!--                <prop key="/ControllerBase2">cortrollerBase2</prop>-->
+<!--                这个Controller为扫描到的-->
+<!--                <prop key="/ScanController">scanController</prop>-->
+<!--            </props>-->
+<!--        </property>-->
+<!--    </bean>-->
+    <!--配置处理器适配器1-->
+    <!-- <bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"></bean>-->
+<!--    ===============================================================-->
+    <!--处理器映射器2：BeanNameUrlHandlerMapping,同样可以管理实现了Controller接口的类
+    此时的注册的Controller的名称(id/name/alias)来映射Controller,名称必须以"/"开头-->
+<!--    <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"></bean>-->
+<!--    ①：<bean id="/controllerBase1" class="com.springbasedxml.controller.ControllerBase1"></bean>
+        ②：<bean name="controllerBase1" class="com.springbasedxml.controller.ControllerBase1"></bean>
+        <alias name="controllerBase1" alias="/base1"></alias>
+        ③：<bean name="/controllerBase1" class="com.springbasedxml.controller.ControllerBase1"></bean>
+-->
+    <!--配置处理器适配器2-->
+    <!-- <bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"></bean>-->
+<!--    ++++++++++++基于以上两种处理器和映射器，我们可以用以下方式配置Controller++++++++++-->
+    <!--这里和配置springbean的方式一样，即可以在xml文件中直接读取实现了Controller接口的类，或是指示spring容器扫描指定路径下的Controller实现类-->
+    <!--方式①，直接将类注册为bean-->
+    <!--        <bean name="controllerBase1" class="com.springbasedxml.controller.ControllerBase1"></bean>-->
+    <!--        <alias name="controllerBase1" alias="/base1"></alias>-->
+    <!--        <bean id="cortrollerBase2" class="com.springbasedxml.controller.CortrollerBase2"></bean>-->
+    <!--方式②，直接指示spring容器去扫描指定路径下的类-->
+    <!--        <context:component-scan base-package="com.springbasedxml.controller.scanControllerExdCont"></context:component-scan>-->
+    <!--    =================================================================-->
+    <!--基于注解的处理器映射器3：RequestMappingHandlerMapping-->
+<!--    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"></bean>-->
+    <!--基于注解的处理器适配器：RequestMappingHandlerAdapter-->
+<!--    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"></bean>-->
+    <!--基于注解一起配置处理器映射器和设适配器，配合包扫描，将添加@Controller的类注册为bean-->
+    <mvc:annotation-driven></mvc:annotation-driven>
+    <!--配置基于注解的的Controller-->
+    <context:component-scan base-package="com.springbasedxml.controller.scanControllerAnno"></context:component-scan>
+    <!--配置视图解析器-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+</beans>

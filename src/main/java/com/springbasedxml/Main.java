@@ -1,6 +1,8 @@
 package com.springbasedxml;
 
 
+import jakarta.servlet.ServletContainerInitializer;
+import org.springframework.web.HttpRequestHandler;
 
 /**
 服务器端表现层基于spring的mvc架构配置1：完全基于xml文件
@@ -30,6 +32,9 @@ package com.springbasedxml;
     example：<url-pattern>/user/myServlet1<url-pattern>
     那么url：http://localhost:8080/mySprignMVC/user/myServlet1将作为唯一结果匹配
     ②：路径匹配
+    ！！！注意一点，路径匹配和后缀名匹配不能同时进行设置，比如：1./user/*.jsp，tomcat
+                                                        2. /*.jsp
+                                                        3./he*.jsp在启动时会报错
     以"/"开头，（"/*"）结尾的url-pattern，
     example：<url-pattern>/users/*</url-pattern>
     那么url：http://localhost:8080/mySpringMVC/users/user/index.jsp
@@ -37,7 +42,13 @@ package com.springbasedxml;
     又或者url：http://localhost:8080/mySpringMVC/users/user
     控制台测试正常打印
     example：<url-pattern>/*</url-pattern>,该url为路径匹配中优先级最低的匹配路径，即所有url都可以匹配
-    那么url：http://localhost:8080/myspringMVC/index.jsp
+    大可不必越俎代庖，jsp文件的请求就应该交给tomcat默认的Servlet处理，一般不用
+    example：<url-pattern>/</url-pattern>,可以匹配所有资源url，并且是优先级最低的url匹配，所以除了jsp文件，
+    其他的Servlet和静态资源请求都可以拦截，
+    因为tomcat自带的用于处理jsp的Servlet没有被覆盖
+    那么url：http://localhost:8080/mySpringMVC/lalala/hello(不存在的资源)，将匹配"/"的Servlet
+ ③：后缀名匹配：*.jsp
+ ！！！！！匹配优先级的问题：精确匹配>路径匹配>后缀名匹配>"/"
  */
 
 
